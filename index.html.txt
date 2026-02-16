@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            background: #1e1e1e;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 40px;
+        }
+        input {
+            width: 80%;
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        #qrcode {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>QR Code Generator</h1>
+    <input id="urlInput" type="text" placeholder="Paste any Roblox profile link here">
+    <br>
+    <button onclick="makeQR()">Generate QR Code</button>
+
+    <div id="qrcode"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        function makeQR() {
+            const url = document.getElementById("urlInput").value;
+            const qrDiv = document.getElementById("qrcode");
+            qrDiv.innerHTML = ""; // Clear old QR
+
+            if (url.trim() === "") return;
+
+            QRCode.toCanvas(url, { width: 400 }, function (err, canvas) {
+                if (err) console.error(err);
+                qrDiv.appendChild(canvas);
+            });
+        }
+    </script>
+
+</body>
+</html>
